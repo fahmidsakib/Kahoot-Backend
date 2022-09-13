@@ -10,14 +10,15 @@ router.post('/signup', async (req, res) => {
     if (!name || !email || !password || !confirmPassword) return res.status(400).json({ error: 'All fields are required' })
     const existingUser = await teacherModel.findOne({ email: email.toLowerCase() })
     if (existingUser !== null) return res.status(400).json({ error: 'Email already exists' })
+    if (password !== confirmPassword) return res.status(400).json({ error: 'Password does not match' })
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
     const newUser = new teacherModel({ name, email: email.toLowerCase(), password: hash })
     try {
         const savedUser = await newUser.save()
-        let payload = JSON.parse(JSON.stringify(savedUser))
-        delete payload.password
-        res.status(201).json({ data: payload })
+        // let payload = JSON.parse(JSON.stringify(savedUser))
+        // delete payload.password
+        res.status(201).json({ alert: 'Signup Successful, Please login to your account' })
     } catch (error) {
         res.status(501).json({ error: error.message })
     }
