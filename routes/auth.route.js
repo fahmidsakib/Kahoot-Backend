@@ -7,7 +7,7 @@ const router = express.Router()
 
 router.post('/signup', async (req, res) => {
     const { name, email, password, confirmPassword } = req.body
-    if (!name || !email || !password || !confirmPassword) return res.status(400).json({ error: 'All field are required' })
+    if (!name || !email || !password || !confirmPassword) return res.status(400).json({ error: 'All fields are required' })
     const existingUser = await teacherModel.findOne({ email: email.toLowerCase() })
     if (existingUser !== null) return res.status(400).json({ error: 'Email already exists' })
     const salt = await bcrypt.genSalt(10)

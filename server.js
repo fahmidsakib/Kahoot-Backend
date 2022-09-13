@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const authRouter = require('./routes/auth.route')
+const questionRouter = require('./routes/question.route')
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
 const morgan = require('morgan')
@@ -25,6 +26,7 @@ app.use(morgan('dev'))
 
 app.use('/auth', authRouter)
 app.use(authenticateRequest)
+app.use('/questions', questionRouter)
 
 
 app.listen(process.env.PORT || 8000)
