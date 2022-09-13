@@ -16,8 +16,6 @@ router.post('/signup', async (req, res) => {
     const newUser = new teacherModel({ name, email: email.toLowerCase(), password: hash })
     try {
         const savedUser = await newUser.save()
-        // let payload = JSON.parse(JSON.stringify(savedUser))
-        // delete payload.password
         res.status(201).json({ alert: 'Signup Successful, Please login to your account' })
     } catch (error) {
         res.status(501).json({ error: error.message })
