@@ -4,11 +4,11 @@ Estimated time: 10hours
     13 Sept '22
     10:54 - 11:04: Working on the base server stucture
     11:04 - 11:21: Working on the models
-    11:21 - 11:30: Working on the auth routes
-    12:05 - 12:46: Working on the auth routes
+    11:21 - 11:30: Working on the auth route
+    12:05 - 12:46: Working on the auth route
     12:46 - 12:59: Working on the authentication
     01:06 - 01:38: Working on the question route
-    xx:xx - xx:xx: Working on the question route
+    02:04 - xx:xx: Working on the question route and quiz route
 
     --------------
     20 Jul '21

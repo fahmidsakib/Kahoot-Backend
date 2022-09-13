@@ -18,11 +18,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 
-router.post('/add', upload.single('image'), async (req, res) => {
+router.post('/add/:quizId', upload.single('image'), async (req, res) => {
     const { que, type, correctAns } = req.body
     if (!que || !type || !correctAns) return res.status(400).json({ error: 'All fields are required' })
 
-    let imageUrl = ''
+    let imageUrl = '', newQuestion
     if (req.file !== undefined) {
         imageUrl = process.env.BASE_URL + 'uploads/' + req.file.filename
     }
@@ -30,17 +30,30 @@ router.post('/add', upload.single('image'), async (req, res) => {
     if (type === 'mcq') {
         const { choice1, choice2, choice3, choice4 } = req.body
         if (!choice1 && !choice2 && !choice3 && !choice4) return res.status(400).json({ error: 'You must provide 4 options' })
-        const newQuestion = await questionModel({ que, type, choice1, choice2, choice3, choice4, correctAns, imageUrl })
+        newQuestion = await questionModel({ que, type, quizId: req.params.quizId, choice1, choice2, choice3, choice4, correctAns, imageUrl })
     }
     else {
-        const newQuestion = await questionModel({ que, type, correctAns, imageUrl })
+        newQuestion = await questionModel({ que, type, quizId: req.params.quizId, correctAns, imageUrl })
     }
-    
+
     try {
         const savedQuestion = await newQuestion.save()
-        res.status(201).json({alert: 'New question added successfully'})
+        const updateQuiz = await quizModel.updateOne({ _id: req.params.quizId },
+            { $push: { questionsId: savedQuestion._id } })
+        res.status(201).json({ alert: 'New question added successfully' })
     } catch (error) {
-        res.status(501).json({error: error.message})
+        res.status(501).json({ error: error.message })
+    }
+})
+
+router.delete('/delete/:queId', async (req, res) => {
+    try {
+        const existingQuestion = await questionModel.deleteOne({ _id: req.params.queId })
+        const updateQuiz = await quizModel.updateOne({ _id: existingQuestion.quizId },
+            { $pull: { questionsId: savedQuestion._id } })
+        res.status(202).json({ alert: "Question deleted successfully" })
+    } catch (error) {
+        res.status(501).json({ error: error.message })
     }
 })
 
