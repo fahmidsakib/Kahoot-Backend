@@ -7,27 +7,44 @@ const router = express.Router()
 
 router.post('/create', async (req, res) => {
     const { title, topic } = req.body
-    if (!title || !topic) return res.status(400).json({ error: 'Both fields are required' }) 
+    if (!title || !topic) return res.status(400).json({ error: 'Both fields are required' })
     const newQuiz = await quizModel({ title, topic, teacherId: req.payload._id })
     try {
         const savedQuiz = await newQuiz.save()
-        res.status(202).json({alert: "Quiz created successfully, Now add some questions"})
+        const updateTeacher = await teacherModel.updateOne({ _id: req.payload._id },
+            { $push: { quizId: savedQuiz._id } })
+        res.status(202).json({ alert: "Quiz created successfully, Now add some questions" })
     } catch (error) {
         res.status(501).json({ error: error.message })
     }
 })
 
 
-router.get('/delete/:quizId', async (req, res) => {
+router.delete('/delete/:quizId', async (req, res) => {
+    const isValid = await quizModel.findOne({ _id: req.params.quizId })
+    if (isValid.teacherId.toString() === req.payload._id) {
+        try {
+            const existingQuiz = await quizModel.deleteOne({ _id: req.params.quizId })
+            const updateQuestion = await questionModel.deleteMany({ quizId: req.params.quizId })
+            const updateTeacher = await teacherModel.updateOne({ _id: req.payload._id },
+                { $pull: { quizId: savedQuiz._id } })
+            res.status(202).json({ alert: "Quiz deleted successfully" })
+        } catch (error) {
+            res.status(501).json({ error: error.message })
+        }
+    }
+    else return res.status(400).json({ error: "You are not authorized to delete this" })
+})
+
+
+router.get('/get-questions/:quizId', async (req, res) => {
     try {
-        const existingQuestion = await quizModel.deleteOne({ _id: req.params.quizId })
-        const updateQuestion = await questionModel.deleteMany({ quizId: req.params.quizId })
-        res.status(202).json({ alert: "Quiz deleted successfully" })
+        const quiz = await quizModel.findOne({ _id: req.params.quizId }).populate('questionsId')
+        res.status(200).json({ data: quiz.questionsId })
     } catch (error) {
         res.status(501).json({ error: error.message })
     }
 })
-
 
 
 

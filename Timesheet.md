@@ -2,18 +2,17 @@
 Estimated time: 10hours
 ### Setting up the Server
     13 Sept '22
+    ---
     10:54 - 11:04: Working on the base server stucture
     11:04 - 11:21: Working on the models
     11:21 - 11:30: Working on the auth route
     12:05 - 12:46: Working on the auth route
     12:46 - 12:59: Working on the authentication
     01:06 - 01:38: Working on the question route
-    02:04 - xx:xx: Working on the question route and quiz route
+    02:04 - 02:50: Working on the question route and quiz route
+    02:50 - 03:52: Working on the verifying all the route in postman
+    03:52 - xx:xx: working on the socket connection
 
-    --------------
-    20 Jul '21
-    09:30 - 09:48: Working on the frontend for Signup and Login 
-    09:57 - 10:50: Working on the frontend for Signup and Login
 
 Part 1 completed in around 3 hours 30mins.
 

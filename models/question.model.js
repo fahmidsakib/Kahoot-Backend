@@ -6,7 +6,7 @@ const questionSchema = new mongoose.Schema(
         type: { type: String, required: true },
         imageUrl: { type: String },
         correctAns: { type: String, required: true },
-        quizId: { type: mongoose.Schema.Types.ObjectId, ref: 'quiz' },
+        quizId: { type: mongoose.Schema.Types.ObjectId, ref: 'quiz', required: true },
         choice1: { type: String },
         choice2: { type: String },
         choice3: { type: String },

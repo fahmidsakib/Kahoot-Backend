@@ -1,12 +1,13 @@
 require('dotenv').config()
 const express = require('express')
+const morgan = require('morgan')
+const cors = require('cors')
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
+const {Server} = require('socket.io') 
 const authRouter = require('./routes/auth.route')
 const questionRouter = require('./routes/question.route')
 const quizRouter = require('./routes/quiz.route')
-const cors = require('cors')
-const jwt = require('jsonwebtoken')
-const morgan = require('morgan')
 
 const app = express()
 app.use(cors())
@@ -27,11 +28,21 @@ app.use(morgan('dev'))
 
 app.use('/auth', authRouter)
 app.use(authenticateRequest)
-app.use('/questions', questionRouter)
-app.use('/quizzes', quizRouter)
+app.use('/question', questionRouter)
+app.use('/quiz', quizRouter)
 
 
-app.listen(process.env.PORT || 8000)
+const httpServer = app.listen(process.env.PORT || 8000)
+const io = new Server(httpServer, { cors: { origin: "*" } })
+
+
+io.on('connection', (socket) => {
+    console.log("Client connected " + socket.id)
+
+
+    socket.on('disconnect', () => console.log("Client disconnected"))
+})
+
 
 function authenticateRequest(req, res, next) {
     const authHeader = req.headers['authorization']
