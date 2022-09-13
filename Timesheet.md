@@ -1,9 +1,11 @@
-## Milestone 1
-Estimated time: 5hrs
-### Part 1
-    19 Jul '21 
-    13:53 - 14:35: Working on the login and signup API 
-    15:00 - 17:00: Working on the login and signup API
+## Kahoot Backend
+Estimated time: 10hours
+### Setting up the Server
+    13 Sept '22
+    10:54 - 11:04: Working on the base server stucture
+    11:04 - 11:21: Working on the models
+    11:21 - 11:30: Working on the auth routes
+    12:05 - xx:xx: Working on the auth routes
     --------------
     20 Jul '21
     09:30 - 09:48: Working on the frontend for Signup and Login 
