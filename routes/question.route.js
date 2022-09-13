@@ -48,9 +48,10 @@ router.post('/add', upload.single('image'), async (req, res) => {
 
 router.delete('/delete/:queId', async (req, res) => {
     try {
+        const question = await questionModel.findOne({ _id: req.params.queId })
+        const updateQuiz = await quizModel.updateOne({ _id: question.quizId },
+            { $pull: { questionsId: req.params.queId } })
         const existingQuestion = await questionModel.deleteOne({ _id: req.params.queId })
-        const updateQuiz = await quizModel.updateOne({ _id: existingQuestion.quizId },
-            { $pull: { questionsId: savedQuestion._id } })
         res.status(202).json({ alert: "Question deleted successfully" })
     } catch (error) {
         res.status(501).json({ error: error.message })
