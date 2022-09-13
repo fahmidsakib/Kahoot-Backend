@@ -5,7 +5,10 @@ Estimated time: 10hours
     10:54 - 11:04: Working on the base server stucture
     11:04 - 11:21: Working on the models
     11:21 - 11:30: Working on the auth routes
-    12:05 - xx:xx: Working on the auth routes
+    12:05 - 12:46: Working on the auth routes
+    12:46 - 12:59: Working on the authentication
+    
+
     --------------
     20 Jul '21
     09:30 - 09:48: Working on the frontend for Signup and Login 

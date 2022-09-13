@@ -10,6 +10,7 @@ const app = express()
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 
+
 mongoose.connect('mongodb+srv://FahmidSakib:1234@kahoot.grpqwro.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -23,6 +24,21 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 app.use('/auth', authRouter)
+app.use(authenticateRequest)
 
 
 app.listen(process.env.PORT || 8000)
+
+function authenticateRequest(req, res, next) {
+    const authHeader = req.headers['authorization']
+    if (!authHeader) return res.status(401).json({ error: 'No token provided' })
+    const accessToken = authHeader.split(' ')[1]
+    if (!accessToken) return res.status(401).json({ error: 'Improper access token provided' })
+    try {
+        const payload = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET)
+        req.payload = payload
+        next()
+    } catch (error) {
+        return res.status(401).json({ error: 'Invalid access token provided' })
+    }
+}

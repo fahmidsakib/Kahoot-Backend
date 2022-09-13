@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const router = express.Router()
 
+
 router.post('/signup', async (req, res) => {
     const { name, email, password, confirmPassword } = req.body
     if (!name || !email || !password || !confirmPassword) return res.status(400).json({ error: 'All field are required' })
@@ -40,8 +41,18 @@ router.post('/signin', async (req, res) => {
 })
 
 
-
-
+router.post('/token', async (req, res) => {
+    const refreshToken = req.body.refreshToken
+    try {
+        const payload = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
+        delete payload.exp
+        delete payload.iat
+        const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_EXPIRATION_TIME })
+        return res.status(200).json({ data: accessToken })
+    } catch (error) {
+        res.status(401).json({ error: 'Invalid refresh token provided' })
+    }
+})
 
 
 module.exports = router
