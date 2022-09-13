@@ -15,7 +15,7 @@ Estimated time: 40hours
 
 ### Creating the frontend react app
     13 Sept '22
-    ---
+    --
     04:08 - 04:20: working on the create frontend repo
     04:20 - 04:50: working on the frontend base structure including routes and store
     04:50 - 06:00: working on the signup and signin UI
@@ -24,6 +24,10 @@ Estimated time: 40hours
     09:20 - 09:36: working on the solved a small issue with signin and signup
     09:36 - 09:44: working on the snackbar
     09:48 - 09:54: working on the signout
+
+
+---
+    Total Time: 410 min (6 hours 50 mins)
 
 
 
