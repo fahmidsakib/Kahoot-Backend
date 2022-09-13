@@ -37,7 +37,7 @@ router.post('/add', upload.single('image'), async (req, res) => {
     }
     
     try {
-        const savesQuestion = await newQuestion.save()
+        const savedQuestion = await newQuestion.save()
         res.status(201).json({alert: 'New question added successfully'})
     } catch (error) {
         res.status(501).json({error: error.message})
