@@ -1,7 +1,7 @@
 ## Kahoot
 Estimated time: 40hours
 ### Setting up the Server/API
-    # 13 Sept '22
+    - 13 Sept '22
     ---------
     10:54 - 11:04: Working on the base server stucture
     11:04 - 11:21: Working on the models
@@ -14,7 +14,7 @@ Estimated time: 40hours
     03:52 - 04:00: working on the socket connection
 
 ### Creating the frontend react app
-    # 13 Sept '22
+    - 13 Sept '22
     ---------
     04:08 - 04:20: working on the create frontend repo
     04:20 - 04:50: working on the frontend base structure including routes and store
@@ -28,13 +28,3 @@ Estimated time: 40hours
 
 ---
     Total Time: 410 min (6 hours 50 mins)
-
-
-
-
-
-Part 1 completed in around 3 hours 30mins.
-
-### MISC
-23 Jul '21
-11.30 - 13.00: Fixed some bugs and UI issues as per the feedback
