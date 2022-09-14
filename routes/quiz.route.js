@@ -5,6 +5,22 @@ const questionModel = require('../models/question.model')
 const router = express.Router()
 
 
+router.get('/', async (req, res) => {
+    try {
+        const quizzes = await teacherModel.findOne({ _id: req.payload._id })
+            .populate({
+                path: 'quizId', populate: [
+                    { path: 'teacherId', model: 'teacher', select: 'name' },
+                    { path: 'questionsId', model: 'question' }
+                ]
+            })
+        res.status(200).json({ data: quizzes.quizId })
+    } catch (error) {
+        res.status(501).json({ error: error.message })
+    }
+})
+
+
 router.post('/create', async (req, res) => {
     const { title, topic } = req.body
     if (!title || !topic) return res.status(400).json({ error: 'Both fields are required' })
