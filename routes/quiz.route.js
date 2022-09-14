@@ -29,7 +29,7 @@ router.post('/create', async (req, res) => {
         const savedQuiz = await newQuiz.save()
         const updateTeacher = await teacherModel.updateOne({ _id: req.payload._id },
             { $push: { quizId: savedQuiz._id } })
-        res.status(202).json({ alert: "Quiz created successfully, Now add some questions" })
+        res.status(202).json({ data: savedQuiz._id, alert: "Quiz created successfully, Now add some questions" })
     } catch (error) {
         res.status(501).json({ error: error.message })
     }

@@ -45,4 +45,7 @@ Estimated time: 40hours
 
     11:13 - 11:23: Working on the create Quiz component
     11:23 - 11:27: Working on the createQuiz func
-    11:27 - 11:xx: Working on the create quiz popup box
+    11:27 - 11:35: Working on the create quiz popup box
+    12:19 - 12:33: Working on the create quiz popup box
+    12:33 - 12:44: Working on the executing createQuiz func
+    12:52 - 01:50: Working on the create and Edit quiz UI
