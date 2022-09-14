@@ -14,7 +14,7 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 
 
-mongoose.connect('mongodb+srv://FahmidSakib:1234@kahoot.grpqwro.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect(process.env.DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -39,7 +39,7 @@ const io = new Server(httpServer, { cors: { origin: "*" } })
 io.on('connection', (socket) => {
     console.log("Client connected " + socket.id)
 
-    
+
 
     socket.on('disconnect', () => console.log("Client disconnected"))
 })

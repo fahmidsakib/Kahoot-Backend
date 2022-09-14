@@ -30,11 +30,19 @@ Estimated time: 40hours
     Total Time: 410 min (6 hours 50 mins)
 ---
 
-
 ### Started working on the Homepage
     **14 Sept '22**
 
     09:13 - 09:26: working on the homepage header
     09:26 - 09:35: working on the get all quizzes for specific user route
     09:35 - 09:50: working on the populate a nested data
-    09:50 - 09:xx: working on the 
+    09:50 - 10:10: working on the setting up the quiz slice
+    10:10 - 10:53: working on the quiz card
+    10:53 - 11:13: working on the some homepage CSS
+
+### Started working on the Create Quiz
+    **14 Sept '22**
+
+    11:13 - 11:23: Working on the create Quiz component
+    11:23 - 11:27: Working on the createQuiz func
+    11:27 - 11:xx: Working on the create quiz popup box
