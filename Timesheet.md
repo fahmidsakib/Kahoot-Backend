@@ -49,3 +49,9 @@ Estimated time: 40hours
     12:19 - 12:33: Working on the create quiz popup box
     12:33 - 12:44: Working on the executing createQuiz func
     12:52 - 01:50: Working on the create and Edit quiz UI
+    02:32 - 02:42: Working on the getQuestions func
+    02:51 - 03:20: Working on the showing ques in the UI
+    03:20 - 05:10: Working on the add question UI
+    05:10 - 05:37: Working on the edit question UI
+    05:37 - 06:00: Working on the addQuestion func
+
