@@ -65,4 +65,23 @@ Estimated time: 40hours
 ### Started working on the Socket
     **15 Sept '22**
 
-    09:13 - xx:xx: Working on the create Quiz component
+    09:30 - 10:50: Working on the fixing some bugs and css issue
+    10:50 - 11:20: Working on the creating quiz room
+    11:20 - 11:40: Working on the creating of the QR code for the room
+    12:05 - 01:05: Working on the waiting component
+    01:05 - 01:50: Working on the connection
+    02:30 - 03:00: working on the debugging an issue with socket
+    04:00 - 04:30: working on the student joining
+    04:30 - 05:20: working on the pass student info
+    05:20 - 06:00: working on the debugging an issue with socket (again)
+
+
+---
+    Total Time: xx min (x hours xx mins)
+---
+
+
+### Started working on the Socket
+    **16 Sept '22**
+
+    09:xx - xx:xx: Working on the xx

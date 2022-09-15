@@ -35,11 +35,49 @@ app.use('/quiz', quizRouter)
 const httpServer = app.listen(process.env.PORT || 8000)
 const io = new Server(httpServer, { cors: { origin: "*" } })
 
+let quizRoomArr = []
 
 io.on('connection', (socket) => {
     console.log("Client connected " + socket.id)
 
+    socket.on('createRoom', (obj) => {
+        let quizRoom = {
+            roomId: obj.roomId,
+            quizId: obj.quizId,
+            teacherId: obj.socketId,
+            questions: obj.questions,
+            start: false,
+            studentsArr: []
+        }
+        quizRoomArr.push(quizRoom)
+    })
 
+    socket.on('joinRoom', (obj) => {
+        let index = quizRoomArr.findIndex((el) => el.roomId === obj.roomId)
+        if (index !== -1 && !quizRoomArr[index].start) {
+            io.to(obj.socketId).emit('joiningConfirm')
+        }
+        io.to(obj.socketId).emit('joiningRejected')
+    })
+
+    socket.on('addNewStudent', (obj) => {
+        let index = quizRoomArr.findIndex((el) => el.roomId === obj.roomId)
+        if (index !== -1 && !quizRoomArr[index].start) {
+            let copyStudents = JSON.parse(JSON.stringify(quizRoomArr[index].studentsArr))
+            let newStudent = {
+                name: obj.name,
+                socketId: obj.socketId,
+                selectedAns: []
+            }
+            copyStudents.push(newStudent)
+            quizRoomArr[index].studentsArr = copyStudents
+            io.to(quizRoomArr[index].teacherId).emit('newStudentJoin', quizRoomArr[index].studentsArr)
+            io.to(obj.socketId).emit('joiningConfirm')
+        }
+        io.to(obj.socketId).emit('joiningRejected')
+    })
+
+    
 
     socket.on('disconnect', () => console.log("Client disconnected"))
 })
