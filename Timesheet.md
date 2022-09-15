@@ -30,6 +30,7 @@ Estimated time: 40hours
     Total Time: 410 min (6 hours 50 mins)
 ---
 
+
 ### Started working on the Homepage
     **14 Sept '22**
 
@@ -55,3 +56,13 @@ Estimated time: 40hours
     05:10 - 05:37: Working on the edit question UI
     05:37 - 06:00: Working on the addQuestion func
 
+
+---
+    Total Time: 414 min (6 hours 54 mins)
+---
+
+
+### Started working on the Socket
+    **15 Sept '22**
+
+    09:13 - xx:xx: Working on the create Quiz component

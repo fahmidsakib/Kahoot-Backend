@@ -24,6 +24,7 @@ router.post('/add', upload.single('image'), async (req, res) => {
 
     let imageUrl = '', newQuestion
     if (req.file !== undefined) {
+        console.log(req.file)
         imageUrl = process.env.BASE_URL + 'uploads/' + req.file.filename
     }
 
@@ -46,6 +47,7 @@ router.post('/add', upload.single('image'), async (req, res) => {
     }
 })
 
+
 router.delete('/delete/:queId', async (req, res) => {
     try {
         const question = await questionModel.findOne({ _id: req.params.queId })
@@ -53,6 +55,45 @@ router.delete('/delete/:queId', async (req, res) => {
             { $pull: { questionsId: req.params.queId } })
         const existingQuestion = await questionModel.deleteOne({ _id: req.params.queId })
         res.status(202).json({ alert: "Question deleted successfully" })
+    } catch (error) {
+        res.status(501).json({ error: error.message })
+    }
+})
+
+
+router.post('/edit/:queId', upload.single('image'), async (req, res) => {
+
+    const getQue = await questionModel.find({ _id: req.params.queId })
+
+    const { que, correctAns} = req.body
+    if (!que || !correctAns ) return res.status(400).json({ error: 'All fields are required' })
+
+    let imageUrl = getQue[0].imageUrl
+    if (req.file !== undefined) {
+        console.log(req.file)
+        imageUrl = process.env.BASE_URL + 'uploads/' + req.file.filename
+    }
+
+    if (getQue[0].type === 'mcq') {
+        const { choice1, choice2, choice3, choice4 } = req.body
+        if (!choice1 && !choice2 && !choice3 && !choice4) return res.status(400).json({ error: 'You must provide 4 options' })
+        getQue[0].que = que
+        getQue[0].correctAns = correctAns
+        getQue[0].choice1 = choice1
+        getQue[0].choice2 = choice2
+        getQue[0].choice3 = choice3
+        getQue[0].choice4 = choice4
+        getQue[0].imageUrl = imageUrl
+    }
+    else {
+        getQue[0].que = que
+        getQue[0].correctAns = correctAns
+        getQue[0].imageUrl = imageUrl
+    }
+
+    try {
+        await questionModel.updateOne({ _id: req.params.queId }, getQue[0])
+        res.status(200).json({ alert: "Question updated successfully" })
     } catch (error) {
         res.status(501).json({ error: error.message })
     }
