@@ -77,11 +77,13 @@ Estimated time: 40hours
 
 
 ---
-    Total Time: xx min (x hours xx mins)
+    Total Time: 385 min (6 hours 25 mins)
 ---
 
 
-### Started working on the Socket
+### Still working on the Socket
     **16 Sept '22**
 
-    09:xx - xx:xx: Working on the xx
+    09:10 - 10:30: Working on the socket issue debugging
+    10:30 - 11:15: Working on the studentPlay UI
+    11:15 - 11:45: Working on the updating students Arr

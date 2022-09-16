@@ -41,6 +41,7 @@ io.on('connection', (socket) => {
     console.log("Client connected " + socket.id)
 
     socket.on('createRoom', (obj) => {
+        console.log(obj.questions)
         let quizRoom = {
             roomId: obj.roomId,
             quizId: obj.quizId,
@@ -72,14 +73,32 @@ io.on('connection', (socket) => {
             copyStudents.push(newStudent)
             quizRoomArr[index].studentsArr = copyStudents
             io.to(quizRoomArr[index].teacherId).emit('newStudentJoin', quizRoomArr[index].studentsArr)
-            io.to(obj.socketId).emit('joiningConfirm')
+            io.to(obj.socketId).emit('waitForOthers')
         }
-        io.to(obj.socketId).emit('joiningRejected')
     })
 
-    
+    socket.on('kick', (obj) => {
+        let index = quizRoomArr.findIndex((el) => el.roomId === obj.roomId)
+        if (index !== -1) {
+            let stuIndex = quizRoomArr[index].studentsArr.findIndex((el) => el.socketId === obj.id)
+            if (stuIndex !== -1) {
+                io.to(quizRoomArr[index].studentsArr[stuIndex].socketId).allSockets('removed')
+                quizRoomArr[index].studentsArr.splice(stuIndex, 1)
+                io.to(quizRoomArr[index].teacherId).emit('newStudentJoin', quizRoomArr[index].studentsArr)
+            }
+        }
+    })
 
-    socket.on('disconnect', () => console.log("Client disconnected"))
+    socket.on('disconnect', () => {
+        let index = quizRoomArr.findIndex((el) => el.teacherId === socket.id)
+        if (index !== -1) {
+            console.log("Client disconnected and Room info will be deleted for room id " + quizRoomArr[index].roomId)
+            console.log(quizRoomArr)
+            quizRoomArr.splice(index, 1)
+            console.log(quizRoomArr)
+        }
+        console.log('Client disconnected')
+    })
 })
 
 
