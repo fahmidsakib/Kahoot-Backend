@@ -41,7 +41,6 @@ io.on('connection', (socket) => {
     console.log("Client connected " + socket.id)
 
     socket.on('createRoom', (obj) => {
-        console.log(obj.questions)
         let quizRoom = {
             roomId: obj.roomId,
             quizId: obj.quizId,
@@ -93,9 +92,7 @@ io.on('connection', (socket) => {
         let index = quizRoomArr.findIndex((el) => el.teacherId === socket.id)
         if (index !== -1) {
             console.log("Client disconnected and Room info will be deleted for room id " + quizRoomArr[index].roomId)
-            console.log(quizRoomArr)
             quizRoomArr.splice(index, 1)
-            console.log(quizRoomArr)
         }
         console.log('Client disconnected')
     })

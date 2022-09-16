@@ -87,3 +87,5 @@ Estimated time: 40hours
     09:10 - 10:30: Working on the socket issue debugging
     10:30 - 11:15: Working on the studentPlay UI
     11:15 - 11:45: Working on the updating students Arr
+    12:05 - 12:33: Working on the socket connectivity (Done)
+    12:33 - 12:xx: Working on the socket starting the quiz
