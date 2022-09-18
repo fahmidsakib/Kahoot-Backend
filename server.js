@@ -4,7 +4,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
-const {Server} = require('socket.io') 
+const { Server } = require('socket.io')
 const authRouter = require('./routes/auth.route')
 const questionRouter = require('./routes/question.route')
 const quizRouter = require('./routes/quiz.route')
@@ -46,6 +46,7 @@ io.on('connection', (socket) => {
             quizId: obj.quizId,
             teacherId: obj.socketId,
             questions: obj.questions,
+            queIndex: -1,
             start: false,
             studentsArr: []
         }
@@ -67,7 +68,8 @@ io.on('connection', (socket) => {
             let newStudent = {
                 name: obj.name,
                 socketId: obj.socketId,
-                selectedAns: []
+                selectedAns: {},
+                score: 0,
             }
             copyStudents.push(newStudent)
             quizRoomArr[index].studentsArr = copyStudents
@@ -85,6 +87,38 @@ io.on('connection', (socket) => {
                 quizRoomArr[index].studentsArr.splice(stuIndex, 1)
                 io.to(quizRoomArr[index].teacherId).emit('newStudentJoin', quizRoomArr[index].studentsArr)
             }
+        }
+    })
+
+    socket.on('nextQue', (roomId) => {
+        let index = quizRoomArr.findIndex((el) => el.roomId === roomId)
+        if (index !== -1) {
+            quizRoomArr[index].queIndex += 1
+            quizRoomArr[index].start = true
+            let copyQue = JSON.parse(JSON.stringify(quizRoomArr[index].questions[quizRoomArr[index].queIndex]))
+            io.to(quizRoomArr[index].teacherId).emit('updateQue', copyQue)
+            delete copyQue.correctAns
+            quizRoomArr[index].studentsArr.forEach(el => { io.to(el.socketId).emit('updateQue', copyQue) })
+        }
+    })
+
+    socket.on('submitAns', (obj) => {
+        let index = quizRoomArr.findIndex((el) => el.roomId === obj.roomId)
+        if (index !== -1) {
+            let stuIndex = quizRoomArr[index].studentsArr.findIndex(el => el.socketId === obj.socketId)
+            if (stuIndex !== -1) {
+                if (quizRoomArr[index].questions[quizRoomArr[index].queIndex].correctAns === obj.ans) quizRoomArr[index].studentsArr[stuIndex].score += 1
+                quizRoomArr[index].studentsArr[stuIndex].selectedAns[quizRoomArr[index].queIndex] = obj.ans
+                io.to(quizRoomArr[index].studentsArr[stuIndex].socketId).emit('getAnswer', quizRoomArr[index].questions[quizRoomArr[index].queIndex].correctAns)
+                io.to(quizRoomArr[index].teacherId).emit('updateStudentsArr', quizRoomArr[index].studentsArr)
+            }
+        }
+    })
+
+    socket.on('showRes', (roomId) => {
+        let index = quizRoomArr.findIndex((el) => el.roomId === roomId)
+        if (index !== -1) { 
+            quizRoomArr[index].studentsArr.forEach(el => { io.to(el.socketId).emit('showRes') })
         }
     })
 

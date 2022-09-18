@@ -1,6 +1,7 @@
 const express = require('express');
 const teacherModel = require('../models/teacher.model')
 const quizModel = require('../models/quiz.model')
+const reportModel = require('../models/report.model')
 const questionModel = require('../models/question.model')
 const router = express.Router()
 
@@ -62,6 +63,29 @@ router.get('/get-questions/:quizId', async (req, res) => {
     }
 })
 
+
+router.post('/save-quiz-reports', async (req, res) => {
+    const { quizId, result, totalQue } = req.body
+    if (!quizId || !result || !totalQue) return res.status(400).json({ error: 'All fields are required' })
+    const newReport = await reportModel({ quizId, result, teacherId: req.payload._id, totalQue })
+    try {
+        const savedReport = await newReport.save()
+        res.status(202).json({ alert: "Report saved successfully" })
+    } catch (error) {
+        res.status(501).json({ error: error.message })
+    }
+})
+
+
+router.get('/reports', async (req, res) => {
+    try {
+        const reports = await reportModel.find({ teacherId : req.payload._id })
+            .populate('teacherId', 'name').populate('quizId')
+        res.status(200).json({ data: reports })
+    } catch (error) {
+        res.status(501).json({ error: error.message })
+    }
+})
 
 
 module.exports = router

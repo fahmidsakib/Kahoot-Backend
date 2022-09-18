@@ -88,4 +88,37 @@ Estimated time: 40hours
     10:30 - 11:15: Working on the studentPlay UI
     11:15 - 11:45: Working on the updating students Arr
     12:05 - 12:33: Working on the socket connectivity (Done)
-    12:33 - 12:xx: Working on the socket starting the quiz
+    12:33 - 01:13: Working on the starting the quiz
+    * There was a power cut for more than 2 hours
+    03:23 - 05:11: Working on ques showing
+
+
+---
+    Total Time: 331 min (5 hours 31 mins)
+---
+
+
+### Playing the quiz
+    **17 Sept '22**
+
+    08:00 - 09:00: Working on the quiz server part
+    09:00 - 09:20: Working on the fixing some socket related bugs
+    09:20 - 09:45: Working on the quiz mcq part
+    09:45 - 09:55: Working on the quiz tf part
+
+
+---
+    Total Time: 110 min (1 hours 50 mins)
+---
+
+
+### Showing and storing the result of the quiz
+    **18 Sept '22**'
+
+    02:05 - 03:05: working on the calculating score
+    03:05 - 03:40: working on the showing the result for teacher part
+    03:40 - 04:10: working on the showing the result for student part
+    04:10 - 05:10: working on the saving reports
+    05:10 - 05:35: working on the showing the reports
+
+
