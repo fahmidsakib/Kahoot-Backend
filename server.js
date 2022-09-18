@@ -38,6 +38,7 @@ const io = new Server(httpServer, { cors: { origin: "*" } })
 let quizRoomArr = []
 
 io.on('connection', (socket) => {
+    
     console.log("Client connected " + socket.id)
 
     socket.on('createRoom', (obj) => {
