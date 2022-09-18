@@ -79,9 +79,24 @@ router.post('/save-quiz-reports', async (req, res) => {
 
 router.get('/reports', async (req, res) => {
     try {
-        const reports = await reportModel.find({ teacherId : req.payload._id })
+        const reports = await reportModel.find({ teacherId: req.payload._id })
             .populate('teacherId', 'name').populate('quizId')
         res.status(200).json({ data: reports })
+    } catch (error) {
+        res.status(501).json({ error: error.message })
+    }
+})
+
+
+router.post('/update-question-order', async (req, res) => {
+    const { questions, quizId } = req.body
+    let updatedQuestion = []
+    questions.forEach((question) => updatedQuestion.push(question._id))
+    const quiz = await quizModel.find({ _id: quizId })
+    quiz[0].questionsId = updatedQuestion
+    try {
+        await quizModel.updateOne({ _id: quizId }, quiz[0])
+        res.status(200).json({ alert: "Question order updated successfully" })
     } catch (error) {
         res.status(501).json({ error: error.message })
     }
