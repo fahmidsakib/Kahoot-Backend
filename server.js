@@ -108,7 +108,7 @@ io.on('connection', (socket) => {
             let stuIndex = quizRoomArr[index].studentsArr.findIndex(el => el.socketId === obj.socketId)
             if (stuIndex !== -1) {
                 if (quizRoomArr[index].questions[quizRoomArr[index].queIndex].correctAns === obj.ans) quizRoomArr[index].studentsArr[stuIndex].score += 1
-                quizRoomArr[index].studentsArr[stuIndex].selectedAns[quizRoomArr[index].queIndex] = obj.ans
+                quizRoomArr[index].studentsArr[stuIndex].selectedAns[quizRoomArr[index].questions[quizRoomArr[index].queIndex]._id] = obj.ans
                 io.to(quizRoomArr[index].studentsArr[stuIndex].socketId).emit('getAnswer', quizRoomArr[index].questions[quizRoomArr[index].queIndex].correctAns)
                 io.to(quizRoomArr[index].teacherId).emit('updateStudentsArr', quizRoomArr[index].studentsArr)
             }

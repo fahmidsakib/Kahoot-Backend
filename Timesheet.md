@@ -127,6 +127,6 @@ Estimated time: 40hours
 
     04:45 - 05:45: working on the que drag and drop locally
     07:05 - 07:30: working on the update the quiz db after the drag and drop
-    07:30 - 07:xx: working on the live quiz update box
+    07:30 - 08:00: working on the live quiz update box
 
 
