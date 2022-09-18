@@ -24,7 +24,6 @@ router.post('/add', upload.single('image'), async (req, res) => {
 
     let imageUrl = '', newQuestion
     if (req.file !== undefined) {
-        console.log(req.file)
         imageUrl = process.env.BASE_URL + 'uploads/' + req.file.filename
     }
 
