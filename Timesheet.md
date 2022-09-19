@@ -143,5 +143,8 @@ Estimated time: 40hours
     10:00 - 10:15: Working on the adding deleteReport route on the front end
     10:15 - 11:00: working on the fixing some bugs
     11:00 - 11:30: working on the UI for mobile
-    11:30 - 11:xx: working on the fixing some more bugs
+    11:30 - 11:45: working on the fixing some more bugs
+    12:10 - 12:45: working on the fixing some more bugs
+    01:00 - 01:35: working on the feedback
+    02:25 - 04:35: working on the feedback (Done)
 
