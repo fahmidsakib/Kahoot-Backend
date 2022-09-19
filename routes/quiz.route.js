@@ -64,7 +64,7 @@ router.get('/get-questions/:quizId', async (req, res) => {
 })
 
 
-router.post('/save-quiz-reports', async (req, res) => {
+router.post('/save-quiz-report', async (req, res) => {
     const { quizId, result, totalQue } = req.body
     if (!quizId || !result || !totalQue) return res.status(400).json({ error: 'All fields are required' })
     const newReport = await reportModel({ quizId, result, teacherId: req.payload._id, totalQue })
@@ -77,7 +77,7 @@ router.post('/save-quiz-reports', async (req, res) => {
 })
 
 
-router.get('/report', async (req, res) => {
+router.get('/reports', async (req, res) => {
     try {
         const reports = await reportModel.find({ teacherId: req.payload._id })
             .populate('teacherId', 'name').populate('quizId')
