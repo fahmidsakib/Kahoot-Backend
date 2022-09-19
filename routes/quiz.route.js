@@ -88,7 +88,7 @@ router.get('/reports', async (req, res) => {
 })
 
 
-router.delete('report/delete/:reportId', async (req, res) => {
+router.delete('/report/delete/:reportId', async (req, res) => {
     try {
         const existingReports = await reportModel.deleteOne({ _id: req.params.reportId })
         res.status(200).json({ alert: "Report deleted successfully" })

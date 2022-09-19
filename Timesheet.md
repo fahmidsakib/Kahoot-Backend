@@ -130,3 +130,18 @@ Estimated time: 40hours
     07:30 - 08:00: working on the live quiz update box
 
 
+---
+    Total Time: 325 min (5 hours 25 mins)
+---
+
+
+### Final touch up and fixing some bugs
+    **19 Sept '22**
+
+    09:15 - 09:45: working on the live quiz board CSS
+    09:45 - 10:00: working on the adding delete report route
+    10:00 - 10:15: Working on the adding deleteReport route on the front end
+    10:15 - 11:00: working on the fixing some bugs
+    11:00 - 11:30: working on the UI for mobile
+    11:30 - 11:xx: working on the fixing some more bugs
+
