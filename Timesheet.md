@@ -148,3 +148,9 @@ Estimated time: 40hours
     01:00 - 01:35: working on the feedback
     02:25 - 04:35: working on the feedback (Done)
 
+
+---
+    Total Time: 350 min (5 hours 50 mins)
+---
+
+
