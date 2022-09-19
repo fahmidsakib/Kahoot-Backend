@@ -44,8 +44,8 @@ router.delete('/delete/:quizId', async (req, res) => {
             const existingQuiz = await quizModel.deleteOne({ _id: req.params.quizId })
             const updateQuestion = await questionModel.deleteMany({ quizId: req.params.quizId })
             const updateTeacher = await teacherModel.updateOne({ _id: req.payload._id },
-                { $pull: { quizId: savedQuiz._id } })
-            res.status(202).json({ alert: "Quiz deleted successfully" })
+                { $pull: { quizId: req.params.quizId } })
+            res.status(200).json({ alert: "Quiz deleted successfully" })
         } catch (error) {
             res.status(501).json({ error: error.message })
         }
@@ -77,11 +77,21 @@ router.post('/save-quiz-reports', async (req, res) => {
 })
 
 
-router.get('/reports', async (req, res) => {
+router.get('/report', async (req, res) => {
     try {
         const reports = await reportModel.find({ teacherId: req.payload._id })
             .populate('teacherId', 'name').populate('quizId')
         res.status(200).json({ data: reports })
+    } catch (error) {
+        res.status(501).json({ error: error.message })
+    }
+})
+
+
+router.delete('report/delete/:reportId', async (req, res) => {
+    try {
+        const existingReports = await reportModel.deleteOne({ _id: req.params.reportId })
+        res.status(200).json({ alert: "Report deleted successfully" })
     } catch (error) {
         res.status(501).json({ error: error.message })
     }
